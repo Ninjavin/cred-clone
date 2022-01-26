@@ -19,15 +19,17 @@ const ScreenText = ({ screen, setCurrentImg, i }) => {
   };
 
   useEffect(() => {
+    let observreRefValue = null;
     const observer = new IntersectionObserver(toggleAnimation, options);
 
     if (ref.current) {
       observer.observe(ref.current);
+      observreRefValue = ref.current;
     }
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (observreRefValue) {
+        observer.unobserve(observreRefValue);
       }
     };
   });

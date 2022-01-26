@@ -19,17 +19,19 @@ const ProductShowcase = () => {
   };
 
   useEffect(() => {
+    let observerRefValue = null;
     const observer = new IntersectionObserver(toggleAnimation, options);
 
     if (!showAnimation) {
       if (ref.current) {
         observer.observe(ref.current);
+        observerRefValue = ref.current;
       }
     }
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (observerRefValue) {
+        observer.unobserve(observerRefValue);
       }
     };
   });
